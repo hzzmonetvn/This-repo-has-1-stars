@@ -1,6 +1,6 @@
 # This-repo-has-N-stars
 
-> This repo has **0** stars, star it to test!
+> This repo has **1** stars, star it to test!
 
 A high-performance, memory-safe, dynamic GitHub repository star synchronizer written in 100% Rust.
 
@@ -17,7 +17,7 @@ The repository name, description, and README dynamically synchronize whenever so
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=hzzmonetvn/This-repo-has-0-stars&type=Date)](https://star-history.com/#hzzmonetvn/This-repo-has-0-stars&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=hzzmonetvn/This-repo-has-1-stars&type=Date)](https://star-history.com/#hzzmonetvn/This-repo-has-1-stars&Date)
 
 ## CLI Usage
 

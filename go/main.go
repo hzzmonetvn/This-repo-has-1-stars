@@ -23,11 +23,20 @@ type ReqBody struct {
 	Description string `json:"description"`
 }
 
-const (
-	repoUrl     = "https://api.github.com/repos/fslongjin/This-project-has-N-stars"
-	githubToken = "githubToken"
+var (
+	repoUrl     = "https://api.github.com/repos/hzzmonetvn/This-project-has-N-stars"
+	githubToken = ""
 	logFile     = "log.txt"
 )
+
+func init() {
+	if envRepo := os.Getenv("REPO_URL"); envRepo != "" {
+		repoUrl = envRepo
+	}
+	if envToken := os.Getenv("GITHUB_TOKEN"); envToken != "" {
+		githubToken = envToken
+	}
+}
 
 var (
 	regex   = regexp.MustCompile(`This-repo-has-(\d+)?-stars`)
@@ -89,7 +98,7 @@ func updateRepoName(info RepoInfo) {
 	}
 	reqBody := ReqBody{
 		Name:        fmt.Sprintf("This-repo-has-%d-stars", newStars),
-		Description: fmt.Sprintf("这个仓库有%d个star，不信你试试", newStars),
+		Description: fmt.Sprintf("This repo has %d stars, star it to test!", newStars),
 	}
 	reader := strings.NewReader(fmt.Sprintf("{\"name\":%s,\"description\":%s}", reqBody.Name, reqBody.Description))
 	req, err := http.NewRequest(http.MethodPatch, repoUrl, reader)

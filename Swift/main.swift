@@ -1,6 +1,6 @@
 import Foundation
-let githubToken = ""
-let repoUrl = "https://api.github.com/repos/fslongjin/This-project-has-N-stars"
+let githubToken = ProcessInfo.processInfo.environment["GITHUB_TOKEN"] ?? ""
+let repoUrl = ProcessInfo.processInfo.environment["REPO_URL"] ?? "https://api.github.com/repos/hzzmonetvn/This-project-has-N-stars"
 
 /// MARK: Tool 
 func getDictionaryFromJSONString(jsonString:String) ->NSDictionary{
@@ -55,7 +55,7 @@ func updateProjectName(name:String, stars:Int) {
         let newName = "This-repo-has-\(stars)-stars"
         let newData:[String: String] = [
             "name": newName,
-            "description": "这个仓库有\(stars)个star，不信你试试",
+            "description": "This repo has \(stars) stars, star it to test!",
         ]
         let newDataJson = jsonToData(jsonDic: newData)
         let url:URL = URL(string: repoUrl)!

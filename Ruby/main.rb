@@ -1,7 +1,7 @@
 require 'faraday'
 
-$repo_url = 'https://api.github.com/repos/fslongjin/This-project-has-N-stars'
-$github_token = ''
+$repo_url = ENV['REPO_URL'] || 'https://api.github.com/repos/hzzmonetvn/This-project-has-N-stars'
+$github_token = ENV['GITHUB_TOKEN'] || ''
 
 $conn = Faraday.new do |f|
     f.request :json
@@ -30,7 +30,7 @@ def update_project
     if current_stars != stars
         data = {
             name: "This-repo-has-#{stars}-stars",
-            description: "这个仓库有#{stars}个star，不信你试试"
+            description: "This repo has #{stars} stars, star it to test!"
         }
         res = $conn.patch($repo_url, data)
         if res.status.eql? 200

@@ -5,11 +5,11 @@ using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 
 // github token
-var githubToken = "";
+var githubToken = Environment.GetEnvironmentVariable("GITHUB_TOKEN") ?? "";
 
 // 仓库地址
-var pubRepoUrl = "https://github.com/fslongjin/This-repo-has-4-stars";
-var repoUrl = "https://api.github.com/repos/fslongjin/This-repo-has-4-stars";
+var pubRepoUrl = Environment.GetEnvironmentVariable("PUB_REPO_URL") ?? "https://github.com/hzzmonetvn/This-repo-has-1-stars";
+var repoUrl = Environment.GetEnvironmentVariable("REPO_URL") ?? "https://api.github.com/repos/hzzmonetvn/This-repo-has-1-stars";
 var repoApiUrl = "https://api.github.com/repos/";
 
 // 构建全局请求
@@ -55,7 +55,7 @@ async Task UpdateRepoNameAsync(RepoInfo repoInfo)
         var body = new
         {
             name = $"This-repo-has-{repoInfo.Watchers}-stars",
-            description = $"这个仓库有{repoInfo.Watchers}个star，不信你试试",
+            description = $"This repo has {repoInfo.Watchers} stars, star it to test!",
         };
         var content = new StringContent(JsonSerializer.Serialize(body), Encoding.UTF8);
         var resp = await _client.PatchAsync($"{repoApiUrl}{repoInfo.FullName}", content);

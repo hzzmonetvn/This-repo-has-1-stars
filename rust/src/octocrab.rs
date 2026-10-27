@@ -27,7 +27,7 @@ pub async fn get_stars() -> octocrab::Result<u32> {
 pub async fn update_to_stars(stars: u32) -> octocrab::Result<Response> {
     let payload = json!({
         "name": format!("This-repo-has-{stars}-stars"),
-        "description": format!("这个仓库有{stars}个star，不信你试试"),
+        "description": format!("This repo has {stars} stars, star it to test!"),
     });
 
     tracing::debug!("{payload:?}");

@@ -15,10 +15,13 @@ public class Main {
   /** 序列化JSON使用 */
   private static final ObjectMapper MAPPER = new ObjectMapper();
   /** github token */
-  private static final String GITHUB_TOKEN = "";
+  private static final String GITHUB_TOKEN =
+      System.getenv("GITHUB_TOKEN") != null ? System.getenv("GITHUB_TOKEN") : "";
   /** 仓库地址 */
   private static final String REPO_URL =
-      "https://api.github.com/repos/fslongjin/This-repo-has-N-stars";
+      System.getenv("REPO_URL") != null
+          ? System.getenv("REPO_URL")
+          : "https://api.github.com/repos/hzzmonetvn/This-repo-has-N-stars";
 
   private static final Pattern PATTERN = Pattern.compile("This-repo-has-(\\d+)?-stars");
   private static final Map<String, String> HEADERS = new HashMap<>();
@@ -55,7 +58,7 @@ public class Main {
     var newName = "This-repo-has-%s-stars".formatted(starResult.stars());
     var newData = MAPPER.createObjectNode();
     newData.put("name", newName);
-    newData.put("description", "这个仓库有%s个star，不信你试试".formatted(starResult.stars()));
+    newData.put("description", "This repo has %s stars, star it to test!".formatted(starResult.stars()));
     System.out.printf("Try to update repo, new Name:%s%n", newName);
 
     var builder =

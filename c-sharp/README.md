@@ -19,8 +19,8 @@
 var githubToken = "";
 
 // repository 地址
-var pubRepoUrl = "https://github.com/fslongjin/This-repo-has-4-stars";
-var repoUrl = "https://api.github.com/repos/fslongjin/This-repo-has-4-stars";
+var pubRepoUrl = "https://github.com/hzzmonetvn/This-repo-has-1-stars";
+var repoUrl = "https://api.github.com/repos/hzzmonetvn/This-repo-has-1-stars";
 ```
 
 2.  F5

@@ -1,4 +1,5 @@
 import json
+import os
 import pprint
 import time
 import requests
@@ -9,10 +10,10 @@ init_logging(log_path="log.txt")
 
 logger = get_logger()
 
-# github的token
-github_token = ""
-# 项目的api的url
-repo_url = "https://api.github.com/repos/fslongjin/This-project-has-N-stars"
+# github token
+github_token = os.environ.get("GITHUB_TOKEN", "")
+# repo api url
+repo_url = os.environ.get("REPO_URL", "https://api.github.com/repos/hzzmonetvn/This-project-has-N-stars")
 regex_pattern = re.compile(r'This-repo-has-(\d+)?-stars')
 headers = {
     "Accept": "application/vnd.github.v3+json",
@@ -49,7 +50,7 @@ def update_project_name(data):
         new_name = "This-repo-has-{}-stars".format(data['stars'])
         new_data = {
             "name": new_name,
-            "description": "这个仓库有{}个star，不信你试试".format(data['stars'])
+            "description": "This repo has {} stars, star it to test!".format(data['stars'])
         }
         logger.info("Try to update repo, new Name:{}".format(new_name))
         r = requests.patch(repo_url, headers=headers, data=json.dumps(new_data))

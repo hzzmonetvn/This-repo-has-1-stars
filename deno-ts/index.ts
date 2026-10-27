@@ -15,8 +15,8 @@ const octokit = new Octokit({
 });
 
 const repoInfo = {
-  owner: "fslongjin",
-  repo: "This-repo-has-N-stars",
+  owner: Deno.env.get("REPO_OWNER") ?? "hzzmonetvn",
+  repo: Deno.env.get("REPO_NAME") ?? "This-repo-has-N-stars",
 };
 
 /**
@@ -42,7 +42,7 @@ function updateToStars(stars: number) {
   return octokit.rest.repos.update({
     ...repoInfo,
     name: `This-repo-has-${stars}-stars`,
-    description: `这个仓库有${stars}个star，不信你试试`,
+    description: `This repo has ${stars} stars, star it to test!`,
   });
 }
 

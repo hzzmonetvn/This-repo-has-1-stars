@@ -46,7 +46,7 @@ def edit_repo(stargazers_count: int) -> None:
         data=json.dumps(
             dict(
                 name=f"This-repo-has-{stargazers_count}-stars",
-                description=f"这个仓库有{stargazers_count}个star，不信你试试",
+                description=f"This repo has {stargazers_count} stars, star it to test!",
             )
         ),
     )

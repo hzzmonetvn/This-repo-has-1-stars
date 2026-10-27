@@ -1,0 +1,41 @@
+name: Sync Stars
+
+on:
+  watch:
+    types: [started]
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: sync-stars
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.SYNC_TOKEN || secrets.GITHUB_TOKEN }}
+
+      - name: Run Star Sync Script
+        env:
+          SYNC_TOKEN: ${{ secrets.SYNC_TOKEN }}
+          REPO_ID: "1319484859"
+        run: |
+          python3 .github/scripts/sync.py
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "hzzmonetvn"
+          git config user.email "hzzmonetvn@users.noreply.github.com"
+          if ! git diff --quiet README.md; then
+            git add README.md
+            git commit -m "Update stars in README"
+            git push
+          fi

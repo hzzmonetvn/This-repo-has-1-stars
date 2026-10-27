@@ -23,12 +23,16 @@ jobs:
         with:
           token: ${{ secrets.SYNC_TOKEN || secrets.GITHUB_TOKEN }}
 
-      - name: Run Star Sync Script
+      - name: Setup Rust toolchain
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+
+      - name: Run Star Sync (Rust)
         env:
           SYNC_TOKEN: ${{ secrets.SYNC_TOKEN }}
           REPO_ID: "1319484859"
+          RUST_LOG: "info"
         run: |
-          python3 .github/scripts/sync.py
+          cargo run --release -- sync
 
       - name: Commit and push changes
         run: |
